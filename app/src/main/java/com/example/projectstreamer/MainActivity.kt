@@ -5,13 +5,19 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,21 +34,26 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier
                         .fillMaxSize(),
-                        containerColor = Color(0xFFD2D5D6)
+                    containerColor = Color(0xFFD2D5D6)
                 ) { innerPadding ->
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding),
 
-                    )
+                        )
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier, backgroundColor: Color = Color.LightGray) {
+fun Greeting(
+    name: String,
+    modifier: Modifier = Modifier,
+
+    ) {
     // Définir la largeur et la hauteur souhaitées pour le header
     val headerWidth = 350.dp
     val headerHeight = 80.dp
@@ -50,10 +61,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier, backgroundColor: Color
 
     Box(
         modifier = modifier
-            .padding(start = 15.dp, top = 15.dp)
-            .width(headerWidth)
+            .padding()
             .height(headerHeight)
-
+            .background(Color.White)
+            .fillMaxSize()
     ) {
         Row(
             modifier = Modifier
@@ -61,11 +72,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier, backgroundColor: Color
         ) {
             // Icône avec un espace
             Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
-            Spacer(modifier = Modifier.width(10.dp)) // Ajoute un espace entre le texte et l'icône
+            Spacer(modifier = Modifier.width(10.dp) .padding(top = 25.dp)) // Ajoute un espace entre le texte et l'icône
+
 
             // Icône avec un espace
             Spacer(modifier = Modifier.width(10.dp)) // Ajoute un espace entre le texte et l'icône
-            Icon(imageVector = Icons.Filled.Search, contentDescription = "")
+            SearchBar(query = "", onQueryChange = {}, onSearch = {}, active = true, onActiveChange = {}) {
+
+            }
 
             // Texte avec padding
             Text(
