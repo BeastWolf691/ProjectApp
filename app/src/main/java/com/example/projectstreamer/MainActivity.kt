@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -26,8 +27,8 @@ class MainActivity : ComponentActivity() {
             ProjectStreamerTheme {
                 Scaffold(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.LightGray) // Couleur de fond pour tout le corps
+                        .fillMaxSize(),
+                        containerColor = Color(0xFFD2D5D6)
                 ) { innerPadding ->
                     Greeting(
                         name = "Android",
@@ -62,15 +63,17 @@ fun Greeting(name: String, modifier: Modifier = Modifier, backgroundColor: Color
             Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
             Spacer(modifier = Modifier.width(10.dp)) // Ajoute un espace entre le texte et l'icône
 
+            // Icône avec un espace
+            Spacer(modifier = Modifier.width(10.dp)) // Ajoute un espace entre le texte et l'icône
+            Icon(imageVector = Icons.Filled.Search, contentDescription = "")
+
             // Texte avec padding
             Text(
                 text = "entre copain copine $name!",
                 modifier = Modifier.weight(1f) // Utilise le reste de l'espace disponible
             )
 
-            // Icône avec un espace
-            Spacer(modifier = Modifier.width(10.dp)) // Ajoute un espace entre le texte et l'icône
-            Icon(imageVector = Icons.Filled.Create, contentDescription = "")
+
         }
     }
 }
