@@ -5,21 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -39,8 +30,7 @@ class MainActivity : ComponentActivity() {
                     Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding),
-
-                        )
+                    )
                 }
             }
         }
@@ -52,42 +42,35 @@ class MainActivity : ComponentActivity() {
 fun Greeting(
     name: String,
     modifier: Modifier = Modifier,
-
-
-    ) {
-    // Définir la largeur et la hauteur souhaitées pour le header
-    val headerWidth = 350.dp
-    val headerHeight = 80.dp
-
-
+) {
     Box(
         modifier = modifier
-            .padding()
-            .height(headerHeight)
+            .height(50.dp)
             .background(Color.White)
             .fillMaxSize()
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize() // Remplir tout le header
+                .fillMaxSize()
+                .padding(horizontal = 16.dp), // Optionnel : ajouter un padding horizontal
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween // Ajout de Arrangement.SpaceBetween pour la répartition de l'espace
         ) {
-            // Icône avec un espace
-            Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
-            Spacer(modifier = Modifier.width(10.dp) .padding(top = 25.dp)) // Ajoute un espace entre le texte et l'icône
-
-
-            // Icône avec un espace
-            Spacer(modifier = Modifier.width(10.dp)) // Ajoute un espace entre le texte et l'icône
-            SearchBar(query = "", onQueryChange = {}, onSearch = {}, active = true, onActiveChange = {}) {
-
-            }
-
-            // Texte avec padding
-            Text(
-                text = "entre copain copine $name!",
-                modifier = Modifier.weight(1f) // Utilise le reste de l'espace disponible
+            Icon(
+                imageVector = Icons.Filled.DateRange,
+                contentDescription = "",
             )
 
+            Spacer(modifier = Modifier.width(10.dp)) // Ajoute un espace entre l'icône et la barre de recherche
+
+            SearchBar(
+                query = "",
+                onQueryChange = {},
+                onSearch = {},
+                active = true,
+                onActiveChange = {},
+                modifier = Modifier.width(400.dp)
+            ) {}
 
         }
     }
