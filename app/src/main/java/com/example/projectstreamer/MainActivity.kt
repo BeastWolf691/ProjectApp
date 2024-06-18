@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,11 +26,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,6 +45,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.projectstreamer.ui.theme.ProjectStreamerTheme
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +88,7 @@ fun Header(
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
     val desiredHeight = (screenHeight / 10) // 1/10 de la hauteur de l'écran
-
+    val text = MutableStateFlow<String>("")
 
     Box(
         modifier = modifier
@@ -106,16 +111,18 @@ fun Header(
 
             Spacer(modifier = Modifier.width(30.dp)) // Ajoute un espace entre l'icône et la barre de recherche
 
-            SearchBar(
-                modifier = Modifier.clip(RoundedCornerShape(100)),
-                query = "",
-                onQueryChange = {},
-                onSearch = {},
-                active = true,
-                onActiveChange = {},
-            ) {
-
-            }
+            TextField(
+                value = text.value,
+                onValueChange = {s:String -> text.value = s},
+                colors = TextFieldDefaults.colors(
+                    unfocusedContainerColor = Color(0x60FFFFFF),
+                    unfocusedIndicatorColor = Color.Transparent,
+                ),
+                modifier = Modifier
+                    .border(width = 0.dp, color = Color.Transparent)
+                    .weight(5f)
+                    .clip(RoundedCornerShape(100))
+            )
 
         }
     }
@@ -138,9 +145,25 @@ fun TextContent(
             .padding(horizontal = 16.dp), // ajuste l'emplacement du texte
         contentAlignment = Alignment.Center
     ) {
+        Icon(
+            imageVector = Icons.Filled.Star,
+            contentDescription = "",
+        )
+        Icon(
+            imageVector = Icons.Filled.Star,
+            contentDescription = "",
+        )
+        Icon(
+            imageVector = Icons.Filled.Star,
+            contentDescription = "",
+        )
+
         Text(
-            text = "Gloire a Cthulhu le grand, l'être suprême",
-            style = TextStyle(fontSize = 25.sp)
+            text = "Le Lorem Ipsum est simplement du faux texte " +
+                    "employé dans la composition et la mise en page " +
+                    "avant impression. Le Lorem Ipsum est le faux " +
+                    "texte standard de l'imprimerie depuis les années ",
+            style = TextStyle(fontSize = 20.sp)
         )
     }
 }
@@ -151,7 +174,7 @@ fun Footer(
 ) {
     val configuration = LocalConfiguration.current
     val screenHeight = configuration.screenHeightDp.dp
-    val desiredHeight = (screenHeight / 4) // 1/4 de la hauteur de l'écran
+    val desiredHeight = (screenHeight / 5) // 1/5 de la hauteur de l'écran
 
     Column(
         modifier = modifier
@@ -223,7 +246,9 @@ fun ImageWithTextComponent(imageResId: Int, text: String) {
         Image(
             painter = painterResource(imageResId),
             contentDescription = null, // La description de contenu peut être null pour les images décoratives
-            modifier = Modifier.width(100.dp)// Taille de l'image
+            modifier = Modifier
+                .width(100.dp)
+                .height(80.dp)// Taille de l'image
         )
         Text(
             text = text,
