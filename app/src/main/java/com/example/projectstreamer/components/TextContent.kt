@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun TextContent(
-    name: String,
     modifier: Modifier = Modifier
 ) {
     val configuration = LocalConfiguration.current
